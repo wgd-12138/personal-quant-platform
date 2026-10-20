@@ -1,0 +1,61 @@
+{
+  "schema_version": "pq_agent.sandbox_docker/1",
+  "note": "容器运行时的默认加固参数。改这里等于改安全边界，必须同步改 docker_runtime.build_run_argv 的默认值并重跑 tests/agent/sandbox/test_docker.py。",
+  "image": {
+    "reference": "python:3.12.7-slim",
+    "pinned_digest": "sha256:4b2b6b6e3e0f5e0e7c0f2f0b9f5b1c2f6c6c9d7d0b5e6d4a3c2b1a0e9f8d7c6b",
+    "digest_status": "unverified_on_this_host",
+    "digest_note": "本机没有 Docker，无法 docker inspect 核对真实 digest。这个值在装好 Docker 的机器上必须用 docker pull + docker images --digests 重新核对后再用；核对之前不得声称镜像供应链已锁定。"
+  },
+  "hardening": {
+    "network": "none",
+    "readonly_root": true,
+    "user": "65532:65532",
+    "cap_drop": [
+      "ALL"
+    ],
+    "security_opt": [
+      "no-new-privileges"
+    ],
+    "pids_limit": 64,
+    "memory": "256m",
+    "memory_swap": "256m",
+    "cpus": "1.0",
+    "tmpfs": [
+      "/work:rw,noexec,nosuid,size=16m"
+    ],
+    "workdir": "/work",
+    "env": [
+      "PYTHONIOENCODING=utf-8",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "PYTHONNOUSERSITE=1"
+    ]
+  },
+  "mounts": {
+    "allowed_roots": [
+      "tests/fixtures"
+    ],
+    "readonly": true,
+    "forbidden_markers": [
+      "docker.sock",
+      "\\\\pipe",
+      "//./pipe"
+    ],
+    "never_mount": [
+      "docker socket",
+      "host user directory",
+      "any absolute host path outside the project root"
+    ]
+  },
+  "data_in": {
+    "channels": [
+      "stdin",
+      "readonly fixture mount"
+    ],
+    "forbidden": [
+      "host arbitrary open",
+      "network fetch"
+    ]
+  },
+  "unavailable_behaviour": "DockerRuntime 不可用时返回 capability gate failed 并拒绝执行；禁止改用 LocalRuntime 冒充隔离。"
+}

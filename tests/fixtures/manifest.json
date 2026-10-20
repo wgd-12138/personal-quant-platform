@@ -1,0 +1,20 @@
+{
+  "schema_version": "pq_agent.manifest/1",
+  "demo": true,
+  "demo_marker": "仅演示/评测：人工构造数据，禁止用于真实决策或生产推送",
+  "generated_by": "planning/agent/evidence/A0-03/make_fixtures.py",
+  "entries": [
+    {
+      "as_of": "2026-07-09",
+      "profiles": [
+        "demo_offline",
+        "replay"
+      ],
+      "file": "market_dataset.demo.json",
+      "sha256": "b8755adb191a22f3f25303060edcbed0c866d9a32e0838fca79eb8621954f5b6",
+      "source": "fixture:demo",
+      "timezone": "Asia/Shanghai",
+      "fetched_at": "2026-07-09T16:10:00+08:00"
+    }
+  ]
+}

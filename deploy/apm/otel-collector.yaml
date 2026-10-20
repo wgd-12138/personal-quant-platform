@@ -1,0 +1,105 @@
+# pq_agent OTel Collector 配置。
+#
+# 这个文件是「应用 → Collector → SkyWalking OAP」链路里唯一需要改动的点。
+# 应用只说 OTLP，不认识 SkyWalking：SkyWalking 升级、换后端（Tempo/Jaeger/商业 APM）
+# 都只改这里，不动 src/pq_agent 一行代码。这是选择 Collector 而不是让应用直连 OAP 的原因。
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  # 内存闸门必须排在最前面：Collector 最常见的生产事故是被上游淹掉 OOM。
+  # 宁可丢数据并让 collector_dropped 涨上去，也不能整栈崩溃——丢了是可观测的，崩了不是。
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 70
+    spike_limit_percentage: 20
+
+  # 属性白名单的第二道闸门（第一道在应用侧 SanitizingSpanExporter）。
+  # 双重过滤是刻意的：应用升级时忘了带脱敏，Collector 这一层还能兜住。
+  filter/redact:
+    error_mode: ignore
+    traces:
+      span:
+        - 'delete_key(attributes, "http.request.header.authorization")'
+        - 'delete_key(attributes, "http.request.header.cookie")'
+        - 'delete_key(attributes, "webhook_url")'
+        - 'delete_key(attributes, "api_key")'
+        - 'set(attributes["pq_agent.collector"], "filtered")'
+
+  # 批处理：把「每条 span 一次 HTTP 请求」变成「一批一次」。
+  batch:
+    timeout: 5s
+    send_batch_size: 512
+    send_batch_max_size: 1024
+
+  # 资源属性补齐：应用侧只保证 service.name，环境与采集点由 Collector 补。
+  resource:
+    attributes:
+      - key: collector.pipeline
+        value: pq-agent-local
+        action: upsert
+
+exporters:
+  # SkyWalking 的 OTel receiver 走 OAP 的 core gRPC 口（11800）。
+  # 注意：SkyWalking 11 的 receiver 在同一个端口上按 handler 分流 traces/metrics/logs，
+  # 所以三个 pipeline 共用这一个 exporter，但**不能**因此以为三种信号的语义相同。
+  otlp/skywalking:
+    endpoint: skywalking-oap:11800
+    tls:
+      insecure: true
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 300s
+    sending_queue:
+      enabled: true
+      num_consumers: 2
+      queue_size: 1000
+
+  # 无 OAP 时的本地落盘通道。契约要求「无 Docker 时提供 file exporter」。
+  # 它写的是 Collector 自己看到的 span 摘要，不是 SkyWalking 的存储。
+  file/degraded:
+    path: /var/lib/otelcol/degraded-traces.jsonl
+    rotation:
+      max_megabytes: 32
+      max_days: 3
+      localtime: true
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  telemetry:
+    # Collector 自己的自监控：没有这一段，Collector 挂了没人知道。
+    logs:
+      level: info
+    metrics:
+      level: detailed
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: 0.0.0.0
+                port: 8888
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, filter/redact, resource, batch]
+      exporters: [otlp/skywalking, file/degraded]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, resource, batch]
+      exporters: [otlp/skywalking]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, resource, batch]
+      exporters: [otlp/skywalking]

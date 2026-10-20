@@ -1,0 +1,463 @@
+{
+  "schema_version": "pq_agent.dataset/1",
+  "demo": true,
+  "demo_marker": "仅演示/评测：人工构造数据，禁止用于真实决策或生产推送",
+  "profiles": [
+    "demo_offline",
+    "replay"
+  ],
+  "source": "fixture:demo",
+  "as_of": "2026-07-09",
+  "fetched_at": "2026-07-09T16:10:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "payload_sha256": "675f18e6f38cd7b651cb6fa4e1349d049d88fed04968394f762726111a0706b1",
+  "data": {
+    "as_of": "2026-07-09",
+    "boards": [
+      {
+        "code": "DEMO-BK-01",
+        "name": "演示行业01",
+        "board_type": "行业",
+        "change_pct": -4.25,
+        "amount": 10137000000.0,
+        "main_net_inflow": -750000000.0,
+        "five_day_return": -6.75,
+        "sixty_day_return": -26.0,
+        "up_count": 6,
+        "down_count": 19,
+        "volume_ratio": 0.65,
+        "twenty_day_return": -9.6
+      },
+      {
+        "code": "DEMO-BK-02",
+        "name": "演示行业02",
+        "board_type": "行业",
+        "change_pct": -3.4,
+        "amount": 10274000000.0,
+        "main_net_inflow": -500000000.0,
+        "five_day_return": -5.4,
+        "sixty_day_return": -19.5,
+        "up_count": 7,
+        "down_count": 18,
+        "volume_ratio": 0.7,
+        "twenty_day_return": -6.4
+      },
+      {
+        "code": "DEMO-BK-03",
+        "name": "演示行业03",
+        "board_type": "行业",
+        "change_pct": -2.55,
+        "amount": 10411000000.0,
+        "main_net_inflow": -250000000.0,
+        "five_day_return": -4.05,
+        "sixty_day_return": -13.0,
+        "up_count": 8,
+        "down_count": 17,
+        "volume_ratio": 0.75,
+        "twenty_day_return": -3.2
+      },
+      {
+        "code": "DEMO-BK-04",
+        "name": "演示行业04",
+        "board_type": "行业",
+        "change_pct": -1.7,
+        "amount": 10548000000.0,
+        "main_net_inflow": 0.0,
+        "five_day_return": -2.7,
+        "sixty_day_return": -6.5,
+        "up_count": 9,
+        "down_count": 16,
+        "volume_ratio": 0.8,
+        "twenty_day_return": 0.0
+      },
+      {
+        "code": "DEMO-BK-05",
+        "name": "演示行业05",
+        "board_type": "行业",
+        "change_pct": -0.85,
+        "amount": 10685000000.0,
+        "main_net_inflow": 250000000.0,
+        "five_day_return": -1.35,
+        "sixty_day_return": 0.0,
+        "up_count": 10,
+        "down_count": 15,
+        "volume_ratio": 0.85,
+        "twenty_day_return": 3.2
+      },
+      {
+        "code": "DEMO-BK-06",
+        "name": "演示行业06",
+        "board_type": "行业",
+        "change_pct": 0.0,
+        "amount": 10822000000.0,
+        "main_net_inflow": 500000000.0,
+        "five_day_return": 0.0,
+        "sixty_day_return": 6.5,
+        "up_count": 11,
+        "down_count": 14,
+        "volume_ratio": 0.9,
+        "twenty_day_return": 6.4
+      },
+      {
+        "code": "DEMO-BK-07",
+        "name": "演示概念01",
+        "board_type": "概念",
+        "change_pct": 0.85,
+        "amount": 10959000000.0,
+        "main_net_inflow": 750000000.0,
+        "five_day_return": 1.35,
+        "sixty_day_return": 13.0,
+        "up_count": 12,
+        "down_count": 13,
+        "volume_ratio": 0.95,
+        "twenty_day_return": 9.6
+      },
+      {
+        "code": "DEMO-BK-08",
+        "name": "演示概念02",
+        "board_type": "概念",
+        "change_pct": 1.7,
+        "amount": 11096000000.0,
+        "main_net_inflow": 1000000000.0,
+        "five_day_return": 2.7,
+        "sixty_day_return": 19.5,
+        "up_count": 13,
+        "down_count": 12,
+        "volume_ratio": 1.0,
+        "twenty_day_return": 12.8
+      },
+      {
+        "code": "DEMO-BK-09",
+        "name": "演示概念03",
+        "board_type": "概念",
+        "change_pct": 2.55,
+        "amount": 11233000000.0,
+        "main_net_inflow": 1250000000.0,
+        "five_day_return": 4.05,
+        "sixty_day_return": 26.0,
+        "up_count": 14,
+        "down_count": 11,
+        "volume_ratio": 1.05,
+        "twenty_day_return": 16.0
+      },
+      {
+        "code": "DEMO-BK-10",
+        "name": "演示概念04",
+        "board_type": "概念",
+        "change_pct": 3.4,
+        "amount": 11370000000.0,
+        "main_net_inflow": 1500000000.0,
+        "five_day_return": 5.4,
+        "sixty_day_return": 32.5,
+        "up_count": 15,
+        "down_count": 10,
+        "volume_ratio": 1.1,
+        "twenty_day_return": 19.2
+      },
+      {
+        "code": "DEMO-BK-11",
+        "name": "演示概念05",
+        "board_type": "概念",
+        "change_pct": 4.25,
+        "amount": 11507000000.0,
+        "main_net_inflow": 1750000000.0,
+        "five_day_return": 6.75,
+        "sixty_day_return": 39.0,
+        "up_count": 16,
+        "down_count": 9,
+        "volume_ratio": 1.15,
+        "twenty_day_return": 22.4
+      },
+      {
+        "code": "DEMO-BK-12",
+        "name": "演示概念06",
+        "board_type": "概念",
+        "change_pct": 5.1,
+        "amount": 11644000000.0,
+        "main_net_inflow": 2000000000.0,
+        "five_day_return": 8.1,
+        "sixty_day_return": 45.5,
+        "up_count": 17,
+        "down_count": 8,
+        "volume_ratio": 1.2,
+        "twenty_day_return": 25.6
+      }
+    ],
+    "indexes": [
+      {
+        "code": "DEMO-IDX-01",
+        "name": "演示指数01",
+        "price": 3111.11,
+        "change_pct": -0.84,
+        "change_amount": -25.0,
+        "amount": 203100000000.0
+      },
+      {
+        "code": "DEMO-IDX-02",
+        "name": "演示指数02",
+        "price": 3222.22,
+        "change_pct": -0.42,
+        "change_amount": -12.5,
+        "amount": 206200000000.0
+      },
+      {
+        "code": "DEMO-IDX-03",
+        "name": "演示指数03",
+        "price": 3333.33,
+        "change_pct": 0.0,
+        "change_amount": 0.0,
+        "amount": 209300000000.0
+      },
+      {
+        "code": "DEMO-IDX-04",
+        "name": "演示指数04",
+        "price": 3444.44,
+        "change_pct": 0.42,
+        "change_amount": 12.5,
+        "amount": 212400000000.0
+      },
+      {
+        "code": "DEMO-IDX-05",
+        "name": "演示指数05",
+        "price": 3555.55,
+        "change_pct": 0.84,
+        "change_amount": 25.0,
+        "amount": 215500000000.0
+      }
+    ],
+    "stocks": [
+      {
+        "code": "DEMO-ST-01",
+        "name": "演示个股01",
+        "price": 9.23,
+        "change_pct": -4.4,
+        "amount": 577000000.0,
+        "turnover_rate": 1.57,
+        "industry": "演示行业02",
+        "high": 9.73,
+        "low": 8.73,
+        "previous_close": 9.12
+      },
+      {
+        "code": "DEMO-ST-02",
+        "name": "演示个股02",
+        "price": 10.46,
+        "change_pct": -3.3,
+        "amount": 654000000.0,
+        "turnover_rate": 1.94,
+        "industry": "演示行业03",
+        "high": 10.96,
+        "low": 9.96,
+        "previous_close": 10.35
+      },
+      {
+        "code": "DEMO-ST-03",
+        "name": "演示个股03",
+        "price": 11.69,
+        "change_pct": -2.2,
+        "amount": 731000000.0,
+        "turnover_rate": 2.31,
+        "industry": "演示行业04",
+        "high": 12.19,
+        "low": 11.19,
+        "previous_close": 11.58
+      },
+      {
+        "code": "DEMO-ST-04",
+        "name": "演示个股04",
+        "price": 12.92,
+        "change_pct": -1.1,
+        "amount": 808000000.0,
+        "turnover_rate": 2.68,
+        "industry": "演示行业05",
+        "high": 13.42,
+        "low": 12.42,
+        "previous_close": 12.81
+      },
+      {
+        "code": "DEMO-ST-05",
+        "name": "演示个股05",
+        "price": 14.15,
+        "change_pct": 0.0,
+        "amount": 885000000.0,
+        "turnover_rate": 3.05,
+        "industry": "演示行业06",
+        "high": 14.65,
+        "low": 13.65,
+        "previous_close": 14.04
+      },
+      {
+        "code": "DEMO-ST-06",
+        "name": "演示个股06",
+        "price": 15.38,
+        "change_pct": 1.1,
+        "amount": 962000000.0,
+        "turnover_rate": 3.42,
+        "industry": "演示行业01",
+        "high": 15.88,
+        "low": 14.88,
+        "previous_close": 15.27
+      },
+      {
+        "code": "DEMO-ST-07",
+        "name": "演示个股07",
+        "price": 16.61,
+        "change_pct": 2.2,
+        "amount": 1039000000.0,
+        "turnover_rate": 3.79,
+        "industry": "演示行业02",
+        "high": 17.11,
+        "low": 16.11,
+        "previous_close": 16.5
+      },
+      {
+        "code": "DEMO-ST-08",
+        "name": "演示个股08",
+        "price": 17.84,
+        "change_pct": 3.3,
+        "amount": 1116000000.0,
+        "turnover_rate": 4.16,
+        "industry": "演示行业03",
+        "high": 18.34,
+        "low": 17.34,
+        "previous_close": 17.73
+      },
+      {
+        "code": "DEMO-ST-09",
+        "name": "演示个股09",
+        "price": 19.07,
+        "change_pct": 4.4,
+        "amount": 1193000000.0,
+        "turnover_rate": 4.53,
+        "industry": "演示行业04",
+        "high": 19.57,
+        "low": 18.57,
+        "previous_close": 18.96
+      },
+      {
+        "code": "DEMO-ST-10",
+        "name": "演示个股10",
+        "price": 20.3,
+        "change_pct": 5.5,
+        "amount": 1270000000.0,
+        "turnover_rate": 4.9,
+        "industry": "演示行业05",
+        "high": 20.8,
+        "low": 19.8,
+        "previous_close": 20.19
+      }
+    ],
+    "externals": [
+      {
+        "name": "纳斯达克",
+        "symbol": ".IXIC",
+        "may_june_return": 3.0,
+        "july_return": 1.0
+      },
+      {
+        "name": "费城半导体ETF",
+        "symbol": "SOXX",
+        "may_june_return": 4.7,
+        "july_return": 1.9
+      },
+      {
+        "name": "英伟达",
+        "symbol": "NVDA",
+        "may_june_return": 6.4,
+        "july_return": 2.8
+      },
+      {
+        "name": "AMD",
+        "symbol": "AMD",
+        "may_june_return": 8.1,
+        "july_return": 3.7
+      },
+      {
+        "name": "博通",
+        "symbol": "AVGO",
+        "may_june_return": 9.8,
+        "july_return": 4.6
+      },
+      {
+        "name": "美光",
+        "symbol": "MU",
+        "may_june_return": 11.5,
+        "july_return": 5.5
+      },
+      {
+        "name": "台积电",
+        "symbol": "TSM",
+        "may_june_return": 13.2,
+        "july_return": 6.4
+      }
+    ],
+    "news": [
+      {
+        "source": "演示快讯",
+        "published_at": "2026-07-09T09:05:00+08:00",
+        "title": "【演示】行业景气度环比回升",
+        "summary": "人工构造的演示新闻，仅用于打通意图识别与 RAG 链路。",
+        "related_names": [
+          "演示行业01",
+          "演示个股01"
+        ],
+        "url": "https://example.invalid/demo/news-1"
+      },
+      {
+        "source": "演示快讯",
+        "published_at": "2026-07-09T11:30:00+08:00",
+        "title": "【演示】外围科技股波动加大",
+        "summary": "人工构造的演示新闻，用于验证外围数据与新闻匹配逻辑。",
+        "related_names": [
+          "演示个股02"
+        ],
+        "url": "https://example.invalid/demo/news-2"
+      },
+      {
+        "source": "演示快讯",
+        "published_at": "2026-07-09T14:05:00+08:00",
+        "title": "【演示】尾盘资金面小幅回暖",
+        "summary": "人工构造的演示新闻，用于验证尾盘复盘链路。",
+        "related_names": [
+          "演示概念01"
+        ],
+        "url": "https://example.invalid/demo/news-3"
+      }
+    ],
+    "positions": [
+      {
+        "code": "DEMO-PS-01",
+        "name": "演示持仓01",
+        "quantity": 1000,
+        "cost_price": 11.5,
+        "buy_date": "2026-06-18",
+        "available_quantity": 1000,
+        "position_value": 11500.0,
+        "note": "演示持仓，非真实账户"
+      },
+      {
+        "code": "DEMO-PS-02",
+        "name": "演示持仓02",
+        "quantity": 2000,
+        "cost_price": 13.0,
+        "buy_date": "2026-06-18",
+        "available_quantity": 2000,
+        "position_value": 26000.0,
+        "note": "演示持仓，非真实账户"
+      },
+      {
+        "code": "DEMO-PS-03",
+        "name": "演示持仓03",
+        "quantity": 3000,
+        "cost_price": 14.5,
+        "buy_date": "2026-06-18",
+        "available_quantity": 3000,
+        "position_value": 43500.0,
+        "note": "演示持仓，非真实账户"
+      }
+    ],
+    "data_sources": [
+      "fixture:demo"
+    ]
+  }
+}

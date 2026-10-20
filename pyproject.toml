@@ -1,0 +1,34 @@
+[project]
+name = "personal-quant-platform"
+version = "0.1.0"
+description = "本地优先的个人量化分析与交易平台"
+requires-python = ">=3.11"
+# 核心包保持零第三方依赖：基础安装不需要任何外部包
+dependencies = []
+
+[project.optional-dependencies]
+# agent 扩展：LangGraph 编排、SQLite checkpoint、FastAPI 演示服务、OpenTelemetry 可观测
+# 只有显式安装 agent extra 时才会引入这些依赖
+agent = [
+    "langgraph>=1.2.15,<2",
+    "langgraph-checkpoint-sqlite>=3.1.2,<4",
+    "fastapi>=0.143.0,<1",
+    "uvicorn>=0.54.0,<1",
+    "httpx>=0.28.1,<1",
+    "opentelemetry-api>=1.45.1,<2",
+    "opentelemetry-sdk>=1.45.1,<2",
+    "opentelemetry-exporter-otlp-proto-http>=1.45.1,<2",
+    "opentelemetry-instrumentation-fastapi>=0.66b1,<1",
+    "opentelemetry-instrumentation-httpx>=0.66b1,<1",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+# 标准 src 布局包发现：核心包与 agent 扩展包都在 src/ 下
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

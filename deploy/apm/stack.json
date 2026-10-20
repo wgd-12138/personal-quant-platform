@@ -1,0 +1,129 @@
+{
+  "schema_version": "pq_agent.apm_stack/1",
+  "note": "这是部署事实卡，不是承诺。digest_status=UNVERIFIED_ON_THIS_HOST 表示本机没有 Docker，从未真正拉取核对过镜像。",
+  "locked_at": "2026-10-14",
+  "components": [
+    {
+      "name": "otel-collector",
+      "image": "otel/opentelemetry-collector-contrib",
+      "version": "0.162.0",
+      "release_date": "2026-09-29",
+      "pinned_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "digest_status": "UNVERIFIED_ON_THIS_HOST",
+      "config_file": "deploy/apm/otel-collector.yaml",
+      "roles": [
+        "otlp-receiver",
+        "processor",
+        "exporter-fanout"
+      ]
+    },
+    {
+      "name": "skywalking-oap",
+      "image": "apache/skywalking-oap-server",
+      "version": "11.0.0",
+      "release_date": "2026-08-28",
+      "pinned_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "digest_status": "UNVERIFIED_ON_THIS_HOST",
+      "roles": [
+        "otel-receiver",
+        "storage",
+        "query-api"
+      ]
+    },
+    {
+      "name": "skywalking-ui",
+      "image": "apache/skywalking-ui",
+      "version": "11.0.0",
+      "release_date": "2026-08-28",
+      "pinned_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "digest_status": "UNVERIFIED_ON_THIS_HOST",
+      "roles": [
+        "ui"
+      ]
+    }
+  ],
+  "ports": [
+    {
+      "port": 4317,
+      "proto": "tcp",
+      "owner": "otel-collector",
+      "purpose": "OTLP gRPC 接收",
+      "bind": "127.0.0.1",
+      "public": false
+    },
+    {
+      "port": 4318,
+      "proto": "tcp",
+      "owner": "otel-collector",
+      "purpose": "OTLP HTTP 接收",
+      "bind": "127.0.0.1",
+      "public": false
+    },
+    {
+      "port": 13133,
+      "proto": "tcp",
+      "owner": "otel-collector",
+      "purpose": "health_check extension",
+      "bind": "127.0.0.1",
+      "public": false
+    },
+    {
+      "port": 8888,
+      "proto": "tcp",
+      "owner": "otel-collector",
+      "purpose": "Collector 自监控指标",
+      "bind": "lo",
+      "public": false
+    },
+    {
+      "port": 11800,
+      "proto": "tcp",
+      "owner": "skywalking-oap",
+      "purpose": "OTLP 入库（core gRPC）",
+      "bind": "lo",
+      "public": false
+    },
+    {
+      "port": 12800,
+      "proto": "tcp",
+      "owner": "skywalking-oap",
+      "purpose": "查询 REST / GraphQL",
+      "bind": "127.0.0.1",
+      "public": false
+    },
+    {
+      "port": 8080,
+      "proto": "tcp",
+      "owner": "skywalking-ui",
+      "purpose": "Web UI",
+      "bind": "127.0.0.1",
+      "public": false
+    }
+  ],
+  "signals": {
+    "traces": {
+      "supported": null,
+      "note": "未在真实栈上验证，见 docs/agent/APM_DEPLOYMENT.md 的 UNVERIFIED 段"
+    },
+    "metrics": {
+      "supported": null,
+      "note": "未在真实栈上验证"
+    },
+    "logs": {
+      "supported": null,
+      "note": "未在真实栈上验证"
+    }
+  },
+  "storage": {
+    "backend": "h2",
+    "persistent_volume": "./runtime/oap",
+    "survives_down": true,
+    "removed_by": "down -v"
+  },
+  "commands": {
+    "up": "docker compose -f deploy/apm/docker-compose.yml up -d",
+    "status": "docker compose -f deploy/apm/docker-compose.yml ps",
+    "down": "docker compose -f deploy/apm/docker-compose.yml down",
+    "destroy": "docker compose -f deploy/apm/docker-compose.yml down -v"
+  }
+}

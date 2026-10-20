@@ -1,0 +1,300 @@
+{
+  "schema_version": "rag-eval-cases/1",
+  "dataset_version": "rag-eval-cases/1",
+  "generated_by": "agent_eval/build_rag_eval_cases.py",
+  "index_path": "agent_eval/results/rag_index.json",
+  "index_hash": "9903038961946c7b2eab6b761d7bb94a299aacddf8be51b7bb44378e99468904",
+  "corpus_hash": "35951e83b3ab34b6e5a7319bb22d10c5292a0f2fe69a336a1e1b8760f3d4b227",
+  "profile": "lexical_only",
+  "honesty_note": [
+    "题目由本仓库文档内容人工撰写，金标是(路径, 关键词)，不是模型自动生成；",
+    "分桶为 fact/number/table/multi_hop；train/dev/test 固定划分；",
+    "调参只用 train 与 dev，test 只用于最终报告。"
+  ],
+  "counts": {
+    "total": 30,
+    "by_split": {
+      "train": 14,
+      "dev": 8,
+      "test": 8
+    },
+    "by_bucket": {
+      "fact": 8,
+      "number": 8,
+      "table": 7,
+      "multi_hop": 7
+    }
+  },
+  "cases": [
+    {
+      "case_id": "fact-01",
+      "bucket": "fact",
+      "split": "train",
+      "question": "意图识别为什么做成两级，L1 的命中阈值是多少？",
+      "gold_path": "docs/agent/INTENT.md",
+      "gold_keyword": "L1_HIT_THRESHOLD",
+      "content_hash": "30e5285bbc460295270c7b6fa1d3c38cce64ee82bb8512fecde409684c16c574"
+    },
+    {
+      "case_id": "fact-02",
+      "bucket": "fact",
+      "split": "train",
+      "question": "等级字段被写死成了什么值，为什么不能把它说成隔离？",
+      "gold_path": "docs/agent/SANDBOX_CONTRACT.md",
+      "gold_keyword": "constraint_only",
+      "content_hash": "d7f0f7a05f803b275beddd49bd2f670ae9693f29792a4f29fe86d4628eb27e53"
+    },
+    {
+      "case_id": "fact-03",
+      "bucket": "fact",
+      "split": "dev",
+      "question": "引用串的格式长什么样，只给文件名算不算引用？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "起始行",
+      "content_hash": "6843e58308a7466edefae0921d67925d12d19fdebdb675538992c683c16315af"
+    },
+    {
+      "case_id": "fact-04",
+      "bucket": "fact",
+      "split": "test",
+      "question": "审批记录的 TTL 是多少，过期之后会怎样？",
+      "gold_path": "docs/agent/HITL_CONTRACT.md",
+      "gold_keyword": "TTL",
+      "content_hash": "d6d880d7c4c37099db65f8184a836ea3dfc893f61531c965cb236782df9d3f1b"
+    },
+    {
+      "case_id": "fact-05",
+      "bucket": "fact",
+      "split": "train",
+      "question": "API 层的鉴权与跨站防护一共几道闸门，顺序是什么？",
+      "gold_path": "docs/agent/API_CONTRACT.md",
+      "gold_keyword": "鉴权",
+      "content_hash": "462a32bc77f703bef048a4f48d973d0ef07285b3ef2bc4b4aed54cb55b49add8"
+    },
+    {
+      "case_id": "fact-06",
+      "bucket": "fact",
+      "split": "dev",
+      "question": "哪些目录前缀被明确拒绝进入 RAG 语料？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "DENIED_PREFIXES",
+      "content_hash": "bc366b1157fe96fef9690ef7d6f66fa3e393f35b7add81b7b02110982d163192"
+    },
+    {
+      "case_id": "fact-07",
+      "bucket": "fact",
+      "split": "test",
+      "question": "工具能力是怎么分级的，为什么要按能力分级？",
+      "gold_path": "docs/agent/CLI_TOOL_MATRIX.md",
+      "gold_keyword": "能力",
+      "content_hash": "38036b898de0d69ce587e79092780337e8fa173102009adef4fde088748b6890"
+    },
+    {
+      "case_id": "fact-08",
+      "bucket": "fact",
+      "split": "train",
+      "question": "为什么核心包必须保持零第三方依赖，agent 依赖怎么隔离？",
+      "gold_path": "docs/agent/EVAL.md",
+      "gold_keyword": "optional Agent",
+      "content_hash": "9dacdb4e3b236b5460a3a04f0cde8e3e24ea06c17896d725e28de92acbcbf02c"
+    },
+    {
+      "case_id": "number-01",
+      "bucket": "number",
+      "split": "train",
+      "question": "CLI 一共有多少个子命令，其中多少个有副作用？",
+      "gold_path": "docs/agent/CLI_TOOL_MATRIX.md",
+      "gold_keyword": "26",
+      "content_hash": "017880aec0f6e9c8f61f2c15000c843b52a234077dca156ee1657b59b417e2f7"
+    },
+    {
+      "case_id": "number-02",
+      "bucket": "number",
+      "split": "dev",
+      "question": "能力清单总共多少条，其中能真正拿到保证的有多少条？",
+      "gold_path": "docs/agent/SANDBOX_CONTRACT.md",
+      "gold_keyword": "12 项",
+      "content_hash": "0fb2d5f2c5aaf1d90592a89efa1532ac107d50e36d1047ba1d4c5d62107dfd39"
+    },
+    {
+      "case_id": "number-03",
+      "bucket": "number",
+      "split": "train",
+      "question": "审批过期时间是多少秒？",
+      "gold_path": "docs/agent/HITL_CONTRACT.md",
+      "gold_keyword": "900",
+      "content_hash": "b4cf20036c4602303cc5e3e30cff8eb01a9493b6ee15c210232b1db1342e7c3a"
+    },
+    {
+      "case_id": "number-04",
+      "bucket": "number",
+      "split": "test",
+      "question": "单个文件进入语料的大小上限是多少？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "512",
+      "content_hash": "b69887ac17a918dec129282afdb1eb3ced1764e37bcb4bcae336cb92265629ec"
+    },
+    {
+      "case_id": "number-05",
+      "bucket": "number",
+      "split": "train",
+      "question": "L1 规则层的强词和弱词分别加多少分？",
+      "gold_path": "docs/agent/INTENT.md",
+      "gold_keyword": "+3",
+      "content_hash": "bc2ca3dc8032483dd85e0e4307c496d1c34e1ea3d4015675a179d64feecd2727"
+    },
+    {
+      "case_id": "number-06",
+      "bucket": "number",
+      "split": "dev",
+      "question": "切块时单块超过多少字会继续按行切？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "1200",
+      "content_hash": "a49e681f0035636f4fabbf69cc56c0506df4054e9f80db7fb8ec16b9b21f92fd"
+    },
+    {
+      "case_id": "number-07",
+      "bucket": "number",
+      "split": "test",
+      "question": "意图一共分成几类？",
+      "gold_path": "docs/agent/INTENT.md",
+      "gold_keyword": "八类",
+      "content_hash": "033036b95c882a895930d73b6b58be6b89fee77d4ea3e9e9ba088512afdc80ce"
+    },
+    {
+      "case_id": "number-08",
+      "bucket": "number",
+      "split": "train",
+      "question": "用户态内核那层一共有多少条能力，比容器层多出几条？",
+      "gold_path": "docs/agent/GVISOR_DEPLOYMENT.md",
+      "gold_keyword": "16 条",
+      "content_hash": "cc7d3305ea94df5704e37f4508bc45cf762cf455f75161f6c167779271157fa3"
+    },
+    {
+      "case_id": "table-01",
+      "bucket": "table",
+      "split": "train",
+      "question": "八类意图各自的优先级打分分别是多少？",
+      "gold_path": "docs/agent/INTENT.md",
+      "gold_keyword": "risk_question",
+      "content_hash": "1dee639246c0bb52fdb83922858f98375d0fa8ed031bd827d4d9644f1af4b0f7"
+    },
+    {
+      "case_id": "table-02",
+      "bucket": "table",
+      "split": "dev",
+      "question": "本机根本做不到的那些限制分别是什么？",
+      "gold_path": "docs/agent/SANDBOX_CONTRACT.md",
+      "gold_keyword": "network_isolation",
+      "content_hash": "5169e74860f5895bd18de7ff715f2facf1bbdd095473d522798f21ba0f524aff"
+    },
+    {
+      "case_id": "table-03",
+      "bucket": "table",
+      "split": "test",
+      "question": "审批的参数绑定不匹配时会报什么错？",
+      "gold_path": "docs/agent/HITL_CONTRACT.md",
+      "gold_keyword": "APPROVAL_ACTION_MISMATCH",
+      "content_hash": "4acd84990c2d02159c11b55b4fc53917208a15170ad27703b316db4785cc3876"
+    },
+    {
+      "case_id": "table-04",
+      "bucket": "table",
+      "split": "train",
+      "question": "API 都有哪些端点，SSE 事件怎么排序？",
+      "gold_path": "docs/agent/API_CONTRACT.md",
+      "gold_keyword": "SSE",
+      "content_hash": "31fc7cc473043ad658bbf4de607e6c126c4f9b87c686d21b9e225d629a5d2a76"
+    },
+    {
+      "case_id": "table-05",
+      "bucket": "table",
+      "split": "dev",
+      "question": "CLI 里哪些命令需要人工确认？",
+      "gold_path": "docs/agent/CLI_TOOL_MATRIX.md",
+      "gold_keyword": "人工确认",
+      "content_hash": "4e26a7ce57296302606ee11e77e1e1038deb85611bfd29d51c6444e5101f14c1"
+    },
+    {
+      "case_id": "table-06",
+      "bucket": "table",
+      "split": "test",
+      "question": "如果没有沙箱这一层，会出现哪些具体问题？",
+      "gold_path": "docs/agent/SANDBOX_CONTRACT.md",
+      "gold_keyword": "死循环",
+      "content_hash": "0b5df75a6e957fd9fe9248517ce9d5b0bd9616a50dd4605b67150fe7cc24edeb"
+    },
+    {
+      "case_id": "table-07",
+      "bucket": "table",
+      "split": "train",
+      "question": "RAG 的两档 profile 分别是什么，降级时怎么标记？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "lexical_only",
+      "content_hash": "2af10d106157747786a8d109b99ecf17db0dc6bf91b9fd038630cc677c06f3ef"
+    },
+    {
+      "case_id": "multi-01",
+      "bucket": "multi_hop",
+      "split": "train",
+      "question": "有副作用的工具调用会在哪个节点被拦下来等人确认？",
+      "gold_path": "docs/agent/HITL_CONTRACT.md",
+      "gold_keyword": "interrupt",
+      "content_hash": "d9af702c324b60a35d2acb8080b27d94941902fb020b7fc21083cc78e8abbba1"
+    },
+    {
+      "case_id": "multi-02",
+      "bucket": "multi_hop",
+      "split": "dev",
+      "question": "为什么本机这层只叫约束层，不能叫安全隔离层？",
+      "gold_path": "docs/agent/SANDBOX_CONTRACT.md",
+      "gold_keyword": "安全隔离",
+      "content_hash": "4d8472838fe405c77e143c84cb1ab48e6e7de3e9e4fc3f054445dc9b974cbc4f"
+    },
+    {
+      "case_id": "multi-03",
+      "bucket": "multi_hop",
+      "split": "test",
+      "question": "一条引用要被判为有效，必须核对哪几项？",
+      "gold_path": "docs/agent/RAG_DATA_POLICY.md",
+      "gold_keyword": "content_hash",
+      "content_hash": "75769efc5ebc55f66f2e9be847546b40739e94b85d1c5bb6c5f54f80d2a89f23"
+    },
+    {
+      "case_id": "multi-04",
+      "bucket": "multi_hop",
+      "split": "train",
+      "question": "什么情况下流程图会先停下来等人点头？",
+      "gold_path": "docs/agent/GRAPH_CONTRACT.md",
+      "gold_keyword": "approval",
+      "content_hash": "125d7ea96166fa96da5d7eedd8543277efc6e033c1bb5b83bec52acc32d36990"
+    },
+    {
+      "case_id": "multi-05",
+      "bucket": "multi_hop",
+      "split": "dev",
+      "question": "遥测里绝对不允许出现哪些内容？",
+      "gold_path": "docs/agent/TELEMETRY_SCHEMA.md",
+      "gold_keyword": "prompt",
+      "content_hash": "c98d3a09876c61dccf2a4f02acd4cb6b987d522d505a2d0eee10cfb1bf66e7c1"
+    },
+    {
+      "case_id": "multi-06",
+      "bucket": "multi_hop",
+      "split": "test",
+      "question": "密钥策略对 webhook 的存储有什么硬规定？",
+      "gold_path": "docs/agent/SECRET_POLICY.md",
+      "gold_keyword": "webhook",
+      "content_hash": "154c2990b2bd5fb0c3a21b40789d3423afa410d5318abdf214be2f7af8b66a5c"
+    },
+    {
+      "case_id": "multi-07",
+      "bucket": "multi_hop",
+      "split": "train",
+      "question": "平台需要分别接收和查询哪些观测项？",
+      "gold_path": "docs/agent/APM_DEPLOYMENT.md",
+      "gold_keyword": "traces, metrics, and logs",
+      "content_hash": "2bb71b9410e23a868f7e8e9b3bcfd51f7eb4f5a93b72f574cef2d18cebaf80cd"
+    }
+  ]
+}

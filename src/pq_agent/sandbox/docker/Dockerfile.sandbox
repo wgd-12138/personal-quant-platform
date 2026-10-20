@@ -1,0 +1,29 @@
+# 固定摘要的沙箱镜像。
+#
+# 为什么不用官方 python 镜像直接跑：
+#   1. 官方镜像带 pip、compiler 和一堆与「跑一段数据分析脚本」无关的东西，
+#      体积越大攻击面越大，镜像层越多越难说清里面到底有什么。
+#   2. 这里需要一个不含包管理器的运行时：脚本只能 import 标准库，
+#      想装包必须改 Dockerfile 重新构建，这本身就是一道人工闸门。
+#
+# 构建（必须同时记录 digest，不能只记录 tag）：
+#   docker build -f src/pq_agent/sandbox/docker/Dockerfile.sandbox \
+#     -t pq-agent-sandbox:3.12.7-slim .
+#   docker images --no-trunc --format "{{.ID}} {{.RepoDigests}}" pq-agent-sandbox
+#
+# 镜像里的 python 版本必须和 DEFAULT_IMAGE 声明的 digest 对应，
+# 换版本 = 换 digest = 换 DEFAULT_IMAGE，三处必须同时改。
+FROM python:3.12.7-slim
+
+# 容器以 65532:65532 运行（见 docker_runtime.CONTAINER_USER），
+# 但镜像里显式建一次用户，避免依赖基础镜像的某个 uid 恰好存在。
+RUN groupadd --gid 65532 sandbox \
+    && useradd --uid 65532 --gid 65532 --no-create-home --shell /usr/sbin/nologin sandbox \
+    && mkdir -p /work \
+    && chown 65532:65532 /work
+
+# 工作目录只放脚本，且会被 --tmpfs 覆盖成 noexec/nosuid 的临时盘。
+WORKDIR /work
+
+# 默认什么都不跑：真实执行由 docker_runtime 用 python -I -B -c 显式拉起。
+CMD ["python", "-I", "-B", "-c", "print('sandbox image ready')"]

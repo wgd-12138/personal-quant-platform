@@ -1,0 +1,21 @@
+{
+  "schema_version": "pq_agent.eval_baseline/1",
+  "recorded_at": "2026-10-14",
+  "recorded_by": "A5-02",
+  "runner": "shim",
+  "note": "这是 A0-00 收尾时用垫片跑全量单测的基线：150 个用例，0 failure 0 error。 本机 DSH 沙箱会把 os.mkdir(mode=0o700) 变成自己进不去的目录，tempfile 因此全挂， 所以用例数从 150 涨到现在的规模属于正常增长（每完成一个任务都会加用例）， 比较只看「有没有新增失败」：failures + errors 必须仍是 0。 原始命令（不走垫片）在本机必然报 86 个环境错误，那不是实现缺陷，单独记录不混进结论。",
+  "l0": {
+    "runner": "shim",
+    "tests": 150,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "raw_command_note": {
+    "command": "python -m unittest discover -s tests",
+    "tests": 150,
+    "failures": 0,
+    "errors": 86,
+    "reason": "全部错误都是 PermissionError: [Errno 13] Permission denied（0o700 临时目录自锁），属本机沙箱环境问题，干净主机上应为 0 error。"
+  }
+}

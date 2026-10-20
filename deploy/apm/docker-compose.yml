@@ -1,0 +1,113 @@
+# pq_agent APM 本地栈：OTel Collector + SkyWalking OAP + SkyWalking UI。
+#
+# 三条硬规矩（写在配置里，不写在文档里就没人遵守）：
+#   1. 所有端口只绑 127.0.0.1。容器网络里用 expose 而不是 -p 0.0.0.0。
+#      演示机不是服务器，把 12800/11800/4317/4318 放公网等于把内部数据面开门。
+#   2. 镜像必须带 digest。:latest 或只写 tag 的镜像，下一次拉取可能就换了内容，
+#      于是「昨天验过的栈」和「今天起的栈」不是同一个东西。
+#   3. 停止不删卷。down 只停容器；要清数据必须显式 down -v，让人有一步后悔的机会。
+#
+# 用法（需要 Docker Desktop 或 Linux 上的 docker compose v2）：
+#   docker compose -f deploy/apm/docker-compose.yml up -d
+#   docker compose -f deploy/apm/docker-compose.yml ps
+#   docker compose -f deploy/apm/docker-compose.yml down
+#
+# 本仓库的开发机没有 Docker，所以这份文件目前只经过静态审计（见 docs/agent/APM_DEPLOYMENT.md）。
+# 没有在真实 Docker 上跑过之前，不得声称 APM 栈已验证。
+
+name: pq-agent-apm
+
+services:
+  # ---------------------------------------------------------------- Collector
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.162.0@sha256:1111111111111111111111111111111111111111111111111111111111111111
+    container_name: pq-apm-collector
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./otel-collector.yaml:/etc/otelcol/config.yaml:ro
+      - ./runtime/collector:/var/lib/otelcol
+    # 只把三个 OTLP 口暴露给宿主，且只绑回环
+    ports:
+      - "127.0.0.1:4317:4317"   # OTLP gRPC
+      - "127.0.0.1:4318:4318"   # OTLP HTTP
+      - "127.0.0.1:13133:13133" # health_check extension
+    # 容器之间走同一个 compose 网络，不经过宿主端口
+    expose:
+      - "8888"   # Collector 自身指标
+    healthcheck:
+      test: ["CMD", "/otelcol-contrib", "--version"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+    restart: "no"
+
+  # ---------------------------------------------------------------- SkyWalking OAP
+  skywalking-oap:
+    image: apache/skywalking-oap-server:11.0.0@sha256:2222222222222222222222222222222222222222222222222222222222222222
+    container_name: pq-apm-oap
+    depends_on:
+      otel-collector:
+        condition: service_started
+    environment:
+      # 显式打开 OTel receiver 的三个 handler。
+      # SkyWalking 11 的默认值本来就已经是 default 与 otlp-traces,otlp-metrics,otlp-logs，
+      # 但默认值会随版本变，写死是为了让「哪一版支持哪些 signal」变成可审计的事实。
+      SW_OTEL_RECEIVER: default
+      SW_OTEL_RECEIVER_ENABLED_HANDLERS: "otlp-traces,otlp-metrics,otlp-logs"
+      SW_STORAGE: h2
+      SW_CORE_REST_HOST: 0.0.0.0
+      SW_CORE_GRPC_HOST: 0.0.0.0
+      JAVA_OPTS: "-Xms256m -Xmx512m"
+    volumes:
+      - ./runtime/oap:/skywalking/data
+    expose:
+      - "11800"  # OTLP 入库（gRPC）
+      - "12800"  # 查询 REST / GraphQL
+    ports:
+      - "127.0.0.1:12800:12800"  # 只把查询口给宿主，演示脚本要读它
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://127.0.0.1:12800/internal/liveness || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          memory: 1G
+    restart: "no"
+
+  # ---------------------------------------------------------------- SkyWalking UI
+  skywalking-ui:
+    image: apache/skywalking-ui:11.0.0@sha256:3333333333333333333333333333333333333333333333333333333333333333
+    container_name: pq-apm-ui
+    depends_on:
+      skywalking-oap:
+        condition: service_started
+    environment:
+      SW_OAP_ADDRESS: "http://skywalking-oap:12800"
+    ports:
+      - "127.0.0.1:8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O - http://127.0.0.1:8080/ >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+    restart: "no"
+
+networks:
+  default:
+    name: pq-agent-apm

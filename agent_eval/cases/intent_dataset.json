@@ -1,0 +1,59 @@
+{
+  "annotation_protocol": "第一轮按模板归属标注（annotator=pass-1-authoring）；第二轮用与规则层不相交的独立挑战词表复核（annotator=pass-2-review）；两轮标签不一致的用例在 annotation.disagreement 中如实登记。本项目没有第二名人工标注者，这不是人工双人标注。",
+  "dataset_version": "intent-cases/2",
+  "reference_date": "2026-07-09",
+  "schema_version": "pq_agent.intent_dataset/1",
+  "source": "synthetic-template:演示/评测语料：模板合成，非真实用户日志",
+  "splits": {
+    "dev": {
+      "count": 45,
+      "disagreements": 5,
+      "file": "intent_dev.jsonl",
+      "labels": {
+        "code_task": 3,
+        "fallback": 2,
+        "history_question": 8,
+        "market_check": 3,
+        "pos_question": 6,
+        "push_request": 6,
+        "report_generate": 8,
+        "risk_question": 9
+      },
+      "sha256": "dd615ab6981d0df91cb6fd2e9a8874a86e609beb1a1a1bce526edb12ade0063b"
+    },
+    "test": {
+      "count": 50,
+      "disagreements": 9,
+      "file": "intent_test.jsonl",
+      "labels": {
+        "code_task": 6,
+        "fallback": 4,
+        "history_question": 9,
+        "market_check": 5,
+        "pos_question": 6,
+        "push_request": 8,
+        "report_generate": 6,
+        "risk_question": 6
+      },
+      "sha256": "89236657f83f7dbb6b6ca35260b353999a31da367dbc19ae9da9222246506023"
+    },
+    "train": {
+      "count": 125,
+      "disagreements": 22,
+      "file": "intent_train.jsonl",
+      "labels": {
+        "code_task": 19,
+        "fallback": 18,
+        "history_question": 11,
+        "market_check": 20,
+        "pos_question": 16,
+        "push_request": 14,
+        "report_generate": 14,
+        "risk_question": 13
+      },
+      "sha256": "c979cc20fbc4a9221bf59957fa61f73d2c200def5a319b8b38cba3d8993384ae"
+    }
+  },
+  "task": "A1-02",
+  "total": 220
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>pq_agent 本地演示</title>
+<style>
+/*__STYLE__*/
+</style>
+</head>
+<body data-demo="__DEMO_FLAG__">
+<header>
+  <h1>pq_agent 本地演示面板</h1>
+  <p class="banner">__BANNER_TEXT__</p>
+  <p class="token-row">
+    <label for="token">访问 token（只存在内存里，刷新后如失效请重启服务）</label>
+    <input id="token" type="password" autocomplete="off" placeholder="粘贴服务启动时打印的 token" />
+    <button id="btn-health" type="button">自检</button>
+  </p>
+</header>
+<main>
+  <section class="panel">
+    <h2>1. 提一个问题</h2>
+    <label for="query">问题（走 replay 固定日期 2026-07-09，不含真实行情与真实推送）</label>
+    <textarea id="query" rows="3">把晨间推送预览准备一下</textarea>
+    <p class="row">
+      <label for="asof">as_of</label>
+      <input id="asof" value="2026-07-09" />
+      <button id="btn-send" type="button">发送（SSE）</button>
+      <button id="btn-abort" type="button">断开连接</button>
+    </p>
+  </section>
+  <section class="panel">
+    <h2>2. 事件流</h2>
+    <pre id="events" class="log"></pre>
+  </section>
+  <section class="panel">
+    <h2>3. 人工确认（会在执行有副作用的动作前停下来等你）</h2>
+    <pre id="approval" class="log small"></pre>
+    <p class="row">
+      <button id="btn-approve" type="button" disabled>批准执行</button>
+      <button id="btn-reject" type="button" disabled>拒绝执行</button>
+      <button id="btn-state" type="button">刷新图状态</button>
+    </p>
+    <pre id="state" class="log small"></pre>
+  </section>
+  <section class="panel">
+    <h2>4. 追踪与成本</h2>
+    <p class="row">
+      <label for="traceid">trace_id</label>
+      <input id="traceid" placeholder="运行结束后自动填入" />
+      <button id="btn-trace" type="button">查追踪</button>
+      <button id="btn-cost" type="button">查成本</button>
+    </p>
+    <pre id="trace" class="log small"></pre>
+    <pre id="cost" class="log small"></pre>
+  <section class="panel wide">
+    <h2>5. APM：拓扑 / 瀑布 / 日志 / 告警</h2>
+    <p class="row">
+      <button id="btn-detail" type="button">查 trace 详情</button>
+      <button id="btn-apm" type="button">查历史指标与告警</button>
+    </p>
+    <p class="hint" id="detail-note">trace 详情只读服务端记录的 span，不在前端推算任何数字。</p>
+    <h3>拓扑（谁调用谁）</h3>
+    <pre id="topology" class="log small"></pre>
+    <h3>瀑布（每个 span 的耗时与状态）</h3>
+    <pre id="waterfall" class="log small"></pre>
+    <h3>日志关联（按 trace_id / span_id 对齐）</h3>
+    <pre id="logs" class="log small"></pre>
+    <h3>历史指标与告警</h3>
+    <pre id="apm" class="log small"></pre>
+  </section>
+  </section>
+</main>
+<script>
+/*__APP_JS__*/
+</script>
+</body>
+</html>

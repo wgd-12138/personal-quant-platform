@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+build/
+dist/
+.tmp/
+.idea/
+.omx/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local secrets and data
+.env
+.env.*
+!.env.example
+config/local.yaml
+data/
+data/positions.csv
+data/watchlist_manual.csv
+data/imports/*.csv
+data/imports/*.xls
+data/imports/*.xlsx
+
+# Runtime outputs
+reports/
+logs/
+*.sqlite
+deploy/apm/runtime/
+agent_eval/results/*
+!agent_eval/results/sandbox_bench.md
+agent_eval/cases/rag_manifest.json
+agent_eval/cases/rag_corpus/secret_sub/
+planning/runs/
+planning/agent/evidence/
+*.log
+
+# Local collaboration and machine-specific context
+AGENTS.md
+CONTEXT.md
+task_plan.md
+progress.md
+findings.md
+lessons.md
+
+# Host-specific reports
+docs/agent/ENVIRONMENT.md

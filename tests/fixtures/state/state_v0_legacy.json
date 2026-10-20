@@ -1,0 +1,24 @@
+{
+  "checkpoint_schema_version": 0,
+  "thread_id": "legacy-thread-1",
+  "mode": "demo_offline",
+  "user_query": "演示：昨天为什么没有推送日报",
+  "messages": [
+    {"message_id": "m1", "role": "user", "summary": "询问昨天日报为什么没推送"}
+  ],
+  "budget": {
+    "max_steps": 12,
+    "max_tokens": 60000,
+    "max_wall_clock_s": 120.0,
+    "steps": 1,
+    "tokens": 128,
+    "started_at": "2026-07-09T08:00:00+08:00",
+    "schema_version": 1
+  },
+  "intent": "history_question",
+  "plan": [],
+  "cursor": 0,
+  "tool_results": [],
+  "citations": [],
+  "errors": []
+}

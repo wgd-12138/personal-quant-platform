@@ -1,0 +1,11 @@
+cash: 100000
+max_position_pct: 0.2
+max_total_position_pct: 0.5
+stop_loss_pct: 0.08
+take_profit_pct: 0.15
+risk_mode: defensive
+watch_times:
+  - "09:40"
+  - "10:30"
+  - "13:30"
+  - "14:45"
