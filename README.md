@@ -7,18 +7,14 @@
 ![OpenTelemetry](https://img.shields.io/badge/APM-OpenTelemetry-425CC7?logo=opentelemetry&logoColor=white)
 ![SkyWalking](https://img.shields.io/badge/APM-SkyWalking-9966FF)
 
-一个**本地优先的个人量化分析平台与 Agent 工程实验室**。项目的重点不是让模型替人下单，而是把企业 Agent 开发中常见的工程问题放进一个可以运行、评测、解释和复盘的代码库里：LangGraph 编排、意图识别、RAG、人工确认、沙箱、断点恢复、权限隔离、OpenTelemetry 与 SkyWalking APM 配置，以及可复跑的离线演示。
-
-> **当前状态（2026-10-20，Asia/Shanghai）**：公开副本复跑 966 项测试（1 项跳过）、离线演示 9/9 且外呼 0；四层评测 L0–L2 通过，L3 因缺少 Docker/SkyWalking 环境为 `unknown`。项目适合本地演示和面试讲解，不能宣称生产可用、真实交易可用或 SkyWalking 端到端已验收。
+一个**本地优先的量化研究与分析平台，集成基于 LangGraph 的 Agent 助手**。系统组合结构化数据处理与报告生成能力，并提供意图识别、RAG、权限控制、人工审批、受限执行环境、OpenTelemetry 埋点和 SkyWalking 部署配置。
 
 ## 项目定位
 
-这个项目同时服务两个目标：
+平台由量化分析与 Agent 助手两部分组成：
 
-1. 先生成可信的本地量化报告，再考虑推送、模拟交易和自动交易。
-2. 用一个小型但完整的 Agent 系统练习真实企业里的边界：数据缺失时失败，工具有副作用时暂停，模型只解释证据，不生成买卖结论。
-
-项目明确不接券商、不自动下单，也不把真实持仓、行情、飞书回执或本机运行记录提交到公开仓库。
+1. **量化分析**：负责输入校验、数据处理、市场分析和本地报告生成。
+2. **Agent 助手**：通过 LangGraph 编排已登记工具，检索资料并解释结构化结果；需要副作用的操作进入人工审批流程。
 
 ## 核心能力
 
@@ -120,9 +116,9 @@ uv run --no-sync --extra agent python -m pq_agent status --json --strict
 
 详细说明见 [APM 部署手册](docs/agent/APM_DEPLOYMENT.md) 和 [遥测合同](docs/agent/TELEMETRY_SCHEMA.md)。
 
-## 面试演示路线
+## 演示流程
 
-建议按 [DEMO_RUNBOOK](docs/agent/DEMO_RUNBOOK.md) 演示：
+可按 [DEMO_RUNBOOK](docs/agent/DEMO_RUNBOOK.md) 验证：
 
 1. 环境体检与配置指纹。
 2. replay 问答、BM25 检索和引用。
@@ -134,7 +130,7 @@ uv run --no-sync --extra agent python -m pq_agent status --json --strict
 8. 进程重启后的 checkpoint 恢复。
 9. 角色越权被代码层拒绝。
 
-这套演示的价值是能同时讲清楚“能力怎么做”和“还没有验证什么”。
+该流程覆盖核心能力、边界条件和未完成的环境验证项。
 
 ## 验证状态
 
@@ -170,7 +166,6 @@ docs/                   产品、数据、架构和 Agent 合同文档
 - Agent 不能自己计算关键数字，也不能生成买卖结论。
 - 写业务数据、外发消息和代码执行必须经过权限检查与人工确认。
 - `LocalRuntime` 只提供约束、静态检查和输出限制，不等于内核级隔离。
-- 真实持仓、报告、webhook、运行截图和验收证据不进入公开仓库。
 - 当前仓库没有选择开源许可证；在许可证确定前，请不要把它当作可再发布的软件包。
 
 ## 文档入口
@@ -181,7 +176,7 @@ docs/                   产品、数据、架构和 Agent 合同文档
 - [沙箱合同](docs/agent/SANDBOX_CONTRACT.md)
 - [gVisor 部署](docs/agent/GVISOR_DEPLOYMENT.md)
 - [四层评测](docs/agent/EVAL.md)
-- [面试演示手册](docs/agent/DEMO_RUNBOOK.md)
+- [演示手册](docs/agent/DEMO_RUNBOOK.md)
 
 ## 贡献
 

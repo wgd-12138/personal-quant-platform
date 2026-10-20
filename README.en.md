@@ -7,18 +7,14 @@
 ![OpenTelemetry](https://img.shields.io/badge/APM-OpenTelemetry-425CC7?logo=opentelemetry&logoColor=white)
 ![SkyWalking](https://img.shields.io/badge/APM-SkyWalking-9966FF)
 
-A **local-first quantitative analysis platform and enterprise Agent engineering lab**. The project is designed to make production Agent concerns executable and explainable: LangGraph orchestration, intent routing, RAG, human approval, sandbox boundaries, checkpoint recovery, role isolation, OpenTelemetry, SkyWalking deployment assets, and deterministic offline evaluation.
-
-> **Current status (2026-10-20, Asia/Shanghai):** the public export was rechecked with 966 tests (1 skipped) and a 9/9 offline demo with zero outbound attempts. Local evaluation passed at L0–L2; L3 remains `unknown` because Docker/SkyWalking is unavailable. This project is suitable for local demos and interview walkthroughs, but is not production-ready, live-trading-ready, or SkyWalking end-to-end verified.
+A **local-first quantitative research and analysis platform with a LangGraph-based Agent assistant**. It combines structured data processing and report generation with intent routing, RAG, access controls, human approval, constrained execution, OpenTelemetry instrumentation, and SkyWalking deployment configuration.
 
 ## Positioning
 
-The repository has two goals:
+The platform consists of two integrated components:
 
-1. Produce a trustworthy local analysis report before considering notifications, paper trading, or automated trading.
-2. Practice the boundaries that matter in enterprise Agent systems: fail on missing data, pause before side effects, and let the model explain structured evidence without inventing trading decisions.
-
-The project does not connect to a broker, place orders automatically, or publish real holdings, market data, Feishu receipts, or machine-specific run records.
+1. **Quantitative analysis:** validate inputs, process data, analyze markets, and generate local reports.
+2. **Agent assistant:** orchestrate registered tools with LangGraph to retrieve information and explain structured results; actions with side effects go through human approval.
 
 ## Features
 
@@ -120,9 +116,9 @@ The repository contains the three-signal model, redaction, and Collector/SkyWalk
 
 See [the APM deployment guide](docs/agent/APM_DEPLOYMENT.md) and [the telemetry contract](docs/agent/TELEMETRY_SCHEMA.md).
 
-## Interview demo path
+## Demo flow
 
-Use [DEMO_RUNBOOK](docs/agent/DEMO_RUNBOOK.md) to walk through:
+Use [DEMO_RUNBOOK](docs/agent/DEMO_RUNBOOK.md) to verify:
 
 1. Environment checks and configuration fingerprints.
 2. Replay Q&A, BM25 retrieval, and citations.
@@ -134,7 +130,7 @@ Use [DEMO_RUNBOOK](docs/agent/DEMO_RUNBOOK.md) to walk through:
 8. Checkpoint recovery after a process restart.
 9. Code-level role denial.
 
-The point of the demo is to explain both how the capability works and what has not been verified.
+The flow covers the core capabilities, boundary conditions, and environment checks that remain incomplete.
 
 ## Verification status
 
@@ -170,7 +166,6 @@ docs/                   Product, data, architecture, and Agent contracts
 - The Agent cannot invent key numbers or generate buy/sell conclusions.
 - Business writes, external delivery, and code execution require capability checks and human approval.
 - `LocalRuntime` provides constraints, static checks, and output limits; it is not kernel-level isolation.
-- Real holdings, reports, webhooks, screenshots, and internal evidence are excluded from the public repository.
 - No open-source license has been selected yet; do not treat the repository as a redistributable software package until that is decided.
 
 ## Documentation
@@ -181,7 +176,7 @@ docs/                   Product, data, architecture, and Agent contracts
 - [Sandbox contract](docs/agent/SANDBOX_CONTRACT.md)
 - [gVisor deployment](docs/agent/GVISOR_DEPLOYMENT.md)
 - [Four-layer evaluation](docs/agent/EVAL.md)
-- [Interview demo runbook](docs/agent/DEMO_RUNBOOK.md)
+- [Demo runbook](docs/agent/DEMO_RUNBOOK.md)
 
 ## Contributing
 
